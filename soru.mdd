@@ -1,0 +1,13 @@
+#User entitysi için bütün katmanları ekleyelim
+#Crud metodlarının ortak üretildiği bir yapı kuralım. (ICrudService)
+---------
+#Userservicete bir register metodu yazalım. (register -> name, surname, email, password, rePassword.)
+#Şimdilik metodun gövdesini builder ile dolduralım.
+#password ile rePaswword'ün kontrolünü yapalım.
+
+#bir login metotu yazalaım. Repository'de email ve şifreye göre kullanıcı dönen bir metot yazılması gerekemektedir.
+#veri tabanında bu kullanıcı var ise sisteme giriş yapabiliyor olmalıyım.
+#password eşleşiyor mu diye de kontrol edilmesi gerekiyor.
+
+
+#Login metodunu Dto ile tekrar yazalım -> loginDto()
