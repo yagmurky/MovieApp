@@ -5,7 +5,6 @@ import com.yagmur.dto.request.RegisterRequestDto;
 import com.yagmur.dto.response.LoginResponseDto;
 import com.yagmur.dto.response.RegisterResponseDto;
 import com.yagmur.entity.User;
-import com.yagmur.exception.ErrorType;
 import com.yagmur.mapper.UserMapper;
 import com.yagmur.repository.UserRepository;
 import com.yagmur.utility.EStatus;
@@ -48,11 +47,7 @@ public class UserService implements ICrudService<User,Long> {
     /**
      * #veri tabanında bu kullanıcı var ise sisteme giriş yapabiliyor olmalıyım.
      * #password eşleşiyor mu diye de kontrol edilmesi gerekiyor.
-     * @param
-     * @return
      */
-
-
 
     public Optional<User> login(String email, String password) {
         Optional<User> loggedInUser = userRepository.findByEmailAndPassword(email, password);
@@ -152,6 +147,7 @@ public class UserService implements ICrudService<User,Long> {
 //ba.admin@email.com şeklinde kayıt işlemi gerçekleştiren kullanıcının status'u Active, type'ı ise Admin olmalıdır. Bu işlevselliği kazandırınız.
 //}
 
+    //commit-2
     public RegisterResponseDto registerMapper(RegisterRequestDto dto) {
         User isExistUser = (User) userRepository.findByEmailIgnoreCase(dto.getEmail());
         if (isExistUser != null) {
