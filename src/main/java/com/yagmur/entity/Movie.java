@@ -38,15 +38,11 @@ public class Movie {
     /**
      *     MovieCommentte  private Long userId;
      *     private Long movieId; tuttuğumuz için buradakii
-     *
-     *
-     *         @ElementCollection
+     *     @ElementCollection
      *     private List<MovieComment> comments;
-     *
      *     ve userdaki    @ElementCollection
      *     private List<Long> comments;
-     *
-     *     bu jher an uçurulabilir.
+     *     bu her an uçurulabilir.
      */
 
 }

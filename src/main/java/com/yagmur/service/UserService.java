@@ -180,7 +180,13 @@ public class UserService implements ICrudService<User,Long> {
     public List<User> findByEmailIgnoreCase(String email) {
         return userRepository.findByEmailIgnoreCase(email);
     }
+    public List<User> findAllByEmailEndingWith(String value){
+        return userRepository.findAllByEmailEndingWith(value);
+    }
 
+    public List<User> findUsersByPasswordLengthGreaterThan(int minPasswordLength) {
+        return userRepository.findUsersByPasswordLengthGreaterThan(minPasswordLength);
+    }
 
 
 

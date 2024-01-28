@@ -1,9 +1,6 @@
 package com.yagmur.dto.response;
 
 import com.yagmur.utility.EStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jdk.jshell.Snippet;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

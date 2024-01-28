@@ -46,7 +46,6 @@ public class UserController {
     public ResponseEntity<Optional<User>> findById(@RequestParam Long id){
         return ResponseEntity.ok(userService.findById(id));
     }
-
     @GetMapping("/find-all")
     public ResponseEntity<List<User>> findAll(){
         return ResponseEntity.ok(userService.findAll());
@@ -61,18 +60,14 @@ public class UserController {
     public ResponseEntity<RegisterResponseDto> registerDto(@RequestBody RegisterRequestDto dto){
         return ResponseEntity.ok(userService.registerDto(dto));
     }
-
     //#Login metodunu Dto ile tekrar yazalım -> loginDto()
-
     @PostMapping("/login-dto")
     public ResponseEntity<LoginResponseDto> loginDto(@RequestBody LoginRequestDto dto){
       return ResponseEntity.ok(userService.loginDto(dto));
     }
-
     @PostMapping("/login-mapper")
     public ResponseEntity<LoginResponseDto> loginMapper(@RequestBody LoginRequestDto dto){
         return ResponseEntity.ok(userService.loginMapper(dto));
-
     }
 
     @PostMapping("/register-mapper")
@@ -99,6 +94,19 @@ public class UserController {
     public ResponseEntity<List<User>> findByEmailIgnoreCase(String email) {
         return ResponseEntity.ok(userService.findByEmailIgnoreCase(email));
     }
+
+    @GetMapping("/find-all-by-email-ending-with")
+    public ResponseEntity<List<User>> findAllByEmailEndingWith(String value){
+        return ResponseEntity.ok(userService.findAllByEmailEndingWith(value));
+    }
+
+    @GetMapping("/find-users-by-password-length-greater-than")
+    public ResponseEntity<List<User>> findUsersByPasswordLengthGreaterThan(int minPasswordLength) {
+        return ResponseEntity.ok(userService.findUsersByPasswordLengthGreaterThan(minPasswordLength));
+    }
+
+
+
 
 
 

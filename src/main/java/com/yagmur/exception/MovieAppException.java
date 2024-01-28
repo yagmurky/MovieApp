@@ -3,15 +3,15 @@ package com.yagmur.exception;
 import lombok.Getter;
 
 @Getter
-public class YarismaAppException extends RuntimeException{
+public class MovieAppException extends RuntimeException{
 
     private final ErrorType errorType;
-    public YarismaAppException(ErrorType errorType){
+    public MovieAppException(ErrorType errorType){
         super(errorType.getMessage());
         this.errorType = errorType;
     }
 
-    public YarismaAppException(ErrorType errorType, String message){
+    public MovieAppException(ErrorType errorType, String message){
         super(message);
         this.errorType = errorType;
     }

@@ -22,9 +22,9 @@ public class GlobalExceptionHandler {
         , HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(YarismaAppException.class)
+    @ExceptionHandler(MovieAppException.class)
     @ResponseBody
-    public ResponseEntity<ErrorMessage> okulOtomasyonuHandler(YarismaAppException okulOtomasyonuException){
+    public ResponseEntity<ErrorMessage> okulOtomasyonuHandler(MovieAppException okulOtomasyonuException){
         return new ResponseEntity<>(createErrorMessage(okulOtomasyonuException,okulOtomasyonuException.getErrorType()),
                 okulOtomasyonuException.getErrorType().getHttpStatus());
     }
