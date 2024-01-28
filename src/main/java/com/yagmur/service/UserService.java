@@ -5,9 +5,11 @@ import com.yagmur.dto.request.RegisterRequestDto;
 import com.yagmur.dto.response.LoginResponseDto;
 import com.yagmur.dto.response.RegisterResponseDto;
 import com.yagmur.entity.User;
+import com.yagmur.exception.ErrorType;
 import com.yagmur.mapper.UserMapper;
 import com.yagmur.repository.UserRepository;
 import com.yagmur.utility.EStatus;
+import com.yagmur.utility.EUserType;
 import com.yagmur.utility.ICrudService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -144,11 +146,24 @@ public class UserService implements ICrudService<User,Long> {
         return UserMapper.INSTANCE.fromUserToLoginResponseDto(optionalUser.get());
     }
 
+//Commit 2-{
+//registerMapper() metodu için;
+//Aynı email ile ikinci kez kayıt işlemi yapılmamalıdır. Bu durumu service katmanında yönetiniz.
+//ba.admin@email.com şeklinde kayıt işlemi gerçekleştiren kullanıcının status'u Active, type'ı ise Admin olmalıdır. Bu işlevselliği kazandırınız.
+//}
 
     public RegisterResponseDto registerMapper(RegisterRequestDto dto) {
-       User user=UserMapper.INSTANCE.fromRegisterRequestDtoToUser(dto);
+        User isExistUser = (User) userRepository.findByEmailIgnoreCase(dto.getEmail());
+        if (isExistUser != null) {
+            throw new IllegalArgumentException("Email is already registered!");
+        }
+        User user=UserMapper.INSTANCE.fromRegisterRequestDtoToUser(dto);
+
         if (!user.getPassword().equalsIgnoreCase(user.getRepassword()) || user.getPassword().isBlank()) {
             throw new IllegalArgumentException("Password does not match!");
+        }else if ("ba.admin@email.com".equals(dto.getEmail())) {
+            user.setStatus(EStatus.ACTIVE);
+            user.setUserType(EUserType.ADMIN);
         }
         userRepository.save(user);
         return UserMapper.INSTANCE.fromUserToRegisterResponseDto(user);
