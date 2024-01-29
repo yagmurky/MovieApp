@@ -7,6 +7,9 @@ import com.yagmur.utility.ICrudService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -24,12 +27,12 @@ public class MovieService implements ICrudService<Movie, Long> {
                 .rating(movie.getRating())
                 .comments(movie.getComments())
                 .country(movie.getCountry())
-                .genre(movie.getGenre())
                 .url(movie.getUrl())
                 .image(movie.getImage())
                 .language(movie.getLanguage())
                 .premiered(movie.getPremiered())
                 .summary(movie.getSummary())
+                .genres(movie.getGenres())
                 .build();
         return movieRepository.save(movieToBeSaved);
     }
@@ -70,8 +73,13 @@ public class MovieService implements ICrudService<Movie, Long> {
     }
 
     //Girilen tarihten önce çıkmış filmleri listeleyen bir metot yazalım. (Tarihi dışarıdan string olarak alalım. formatımız (dd-MM-yyyy) -> gün-ay-yıl şeklinde olsun.
-    public List<Movie> findByReleaseDateBefore(Date releaseDate){
-        return movieRepository.findByReleaseDateBefore(releaseDate);
+
+    public List<Movie> findByPremieredBefore(String dateString) throws Exception {
+        //local date e çevir
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate parsedDate = LocalDate.parse(dateString, formatter);
+        // Veritabanındaki premiered alanını sorgula
+        return movieRepository.findByPremieredBefore(parsedDate);
     }
 
     //Filmler içerisinde puanları 7, 8, 9 olan filmleri getiren bir metot yazalım.

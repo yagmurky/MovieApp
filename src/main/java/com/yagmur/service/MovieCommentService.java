@@ -51,10 +51,10 @@ public class MovieCommentService implements ICrudService <MovieComment,Long> {
     }
     //Verilen tarih aralıklarında belirli bir filme yapılmış olan yorumları gösteren bir metot yazalım.
     public List<MovieComment> findByMovieIdAndCommentDateBetween(Long movieId, Date startDate, Date endDate){
-        return movieCommentRepository.findByMovieIdAndCommentDateBetween(movieId,startDate,endDate);
+        return movieCommentRepository.findByMovieIdAndDateBetween(movieId,startDate,endDate);
     }
     //Yorum uzunluğu 20 karakterden büyük olan yorumları getiren bir metot yazalım.
     public List<MovieComment> findByCommentLengthGreaterThan(int length){
-        return movieCommentRepository.findByCommentLengthGreaterThan(length);
+        return movieCommentRepository.findByContentLengthGreaterThan(length);
     }
 }

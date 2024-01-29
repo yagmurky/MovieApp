@@ -18,7 +18,6 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Genre genre;
     private String language;
     private String image;
     private String name;
@@ -26,7 +25,7 @@ public class Movie {
     private Double rating;
     @Column(length = 3000)
     private String summary;
-    private  String premiered;
+    private String premiered;
     private String url;
 
     @ElementCollection
