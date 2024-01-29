@@ -39,7 +39,6 @@ public class User {
     @Builder.Default
     private EUserType userType = EUserType.USER;
 
-
     @Enumerated(EnumType.STRING)
     @Builder.Default
     private EStatus status = EStatus.PENDING;

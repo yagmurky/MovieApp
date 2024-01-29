@@ -1,6 +1,5 @@
 package com.yagmur.entity;
 
-import com.yagmur.utility.EGenre;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,8 +18,7 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Enumerated
-    private EGenre genre;
+    private Genre genre;
     private String language;
     private String image;
     private String name;

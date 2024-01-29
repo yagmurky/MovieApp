@@ -1,11 +1,13 @@
 package com.yagmur.service;
 
 import com.yagmur.entity.Movie;
+import com.yagmur.entity.User;
 import com.yagmur.repository.MovieRepository;
 import com.yagmur.utility.ICrudService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,13 +18,25 @@ public class MovieService implements ICrudService<Movie, Long> {
     private final MovieRepository movieRepository;
 
     @Override
-    public Movie save(Movie entity) {
-        return null;
+    public Movie save(Movie movie) {
+        Movie movieToBeSaved = Movie.builder()
+                .name(movie.getName())
+                .rating(movie.getRating())
+                .comments(movie.getComments())
+                .country(movie.getCountry())
+                .genre(movie.getGenre())
+                .url(movie.getUrl())
+                .image(movie.getImage())
+                .language(movie.getLanguage())
+                .premiered(movie.getPremiered())
+                .summary(movie.getSummary())
+                .build();
+        return movieRepository.save(movieToBeSaved);
     }
 
     @Override
     public Movie update(Movie entity) {
-        return null;
+      return movieRepository.save(entity);
     }
 
     @Override
@@ -32,16 +46,36 @@ public class MovieService implements ICrudService<Movie, Long> {
 
     @Override
     public List<Movie> findAll() {
-        return null;
+        List<Movie> movieList = movieRepository.findAll();
+        if (movieList.isEmpty()) {
+            throw new NullPointerException("Movie list is empty!");
+        }
+        return movieList;
     }
 
     @Override
     public Optional<Movie> findById(Long aLong) {
-        return Optional.empty();
+        return movieRepository.findById(aLong);
+
     }
 
     @Override
     public Movie deleteById(Long aLong) {
         return null;
+    }
+
+    //Belli bir rating üzerindeki Movie'leri getiren bir metot yazalım
+    public List<Movie> findByRatingGreaterThan(double rating){
+        return movieRepository.findByRatingGreaterThan(rating);
+    }
+
+    //Girilen tarihten önce çıkmış filmleri listeleyen bir metot yazalım. (Tarihi dışarıdan string olarak alalım. formatımız (dd-MM-yyyy) -> gün-ay-yıl şeklinde olsun.
+    public List<Movie> findByReleaseDateBefore(Date releaseDate){
+        return movieRepository.findByReleaseDateBefore(releaseDate);
+    }
+
+    //Filmler içerisinde puanları 7, 8, 9 olan filmleri getiren bir metot yazalım.
+    public List<Movie> findByRatingIn(List<Double> ratings){
+        return movieRepository.findByRatingIn(ratings);
     }
 }
